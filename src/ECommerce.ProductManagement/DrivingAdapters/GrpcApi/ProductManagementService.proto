@@ -1,0 +1,185 @@
+syntax = "proto3";
+
+option csharp_namespace = "ECommerce.ProductManagement.API.Grpc";
+import "google/protobuf/empty.proto";
+
+package ProductManagementApi;
+
+service ProductManagementService {
+
+  rpc GetCategory (GetCategoryRequest) returns (GetCategoryResponse);
+  rpc AddCategory (AddCategoryRequest) returns (AddCategoryResponse);
+  rpc EditCategory (EditCategoryRequest) returns (EditCategoryResponse);
+  rpc RemoveCategory (RemoveCategoryRequest) returns (google.protobuf.Empty);
+  rpc CategoryList (CategoryListRequest) returns (CategoryListResponse);
+
+  rpc GetProduct (GetProductRequest) returns (GetProductResponse);
+  rpc AddProduct (AddProductRequest) returns (AddProductResponse);
+  rpc EditProduct (EditProductRequest) returns (EditProductResponse);
+  rpc RemoveProduct (RemoveProductRequest) returns (google.protobuf.Empty);
+  rpc ProductList (ProductListRequest) returns (ProductListResponse);
+
+  rpc GetProductSpecification (GetProductSpecificationRequest) returns (GetProductSpecificationResponse);
+  rpc AddProductSpecification (AddProductSpecificationRequest) returns (AddProductSpecificationResponse);
+  rpc EditProductSpecification (EditProductSpecificationRequest) returns (EditProductSpecificationResponse);
+  rpc RemoveProductSpecification (RemoveProductSpecificationRequest) returns (google.protobuf.Empty);
+  rpc ProductSpecificationList (ProductSpecificationListRequest) returns (ProductSpecificationListResponse);
+}
+
+message GetCategoryRequest{
+	string Id = 1;
+}
+
+message GetCategoryResponse{
+  string Id = 1;
+  string Title = 2;
+}
+message AddCategoryRequest{
+	string Title = 1;
+}
+message AddCategoryResponse{
+  string Id = 1;
+  string Title = 2;
+}
+
+message EditCategoryRequest{
+  string Id = 1;
+  string Title = 2;
+}
+message EditCategoryResponse{
+  string Id = 1;
+  string Title = 2;
+}
+
+message RemoveCategoryRequest{
+  string Id = 1;
+}
+
+message CategoryListRequest {
+  int32 PageIndex = 1;
+  int32 PageSize = 2;
+}
+
+message SingleCategory {
+  string Id = 1;
+  string Title = 2;
+}
+
+message CategoryListResponse{
+  repeated SingleCategory CategoryItems = 1;
+}
+
+message GetProductSpecificationRequest{
+  string Id = 1;
+}
+message GetProductSpecificationResponse{
+  string Id = 1;
+  string SpecificationTitle = 2;
+  string SpecificationValue = 3;
+  int32 Priority = 4;
+  string ProductId = 5 ;
+}
+message AddProductSpecificationRequest{
+  string SpecificationTitle = 1;
+  string SpecificationValue = 2;
+  int32 Priority = 3;
+  string ProductId = 4 ;
+}
+message AddProductSpecificationResponse{
+  string Id = 1;
+  string SpecificationTitle = 2;
+  string SpecificationValue = 3;
+  int32 Priority = 4;
+  string ProductId = 5 ;
+}
+message EditProductSpecificationRequest{
+  string Id = 1;
+  string SpecificationTitle = 2;
+  string SpecificationValue = 3;
+  int32 Priority = 4;
+  string ProductId = 5 ;
+}
+message EditProductSpecificationResponse{
+  string Id = 1;
+  string SpecificationTitle = 2;
+  string SpecificationValue = 3;
+  int32 Priority = 4;
+  string ProductId = 5 ;
+}
+message RemoveProductSpecificationRequest {
+  string Id = 1;
+}
+
+message ProductSpecificationListRequest{
+  string ProductId = 1 ;
+}
+
+message SingleProductSpecification {
+  string Id = 1;
+  string SpecificationTitle = 2;
+  string SpecificationValue = 3;
+  int32 Priority = 4;
+  string ProductId = 5 ;
+}
+
+message ProductSpecificationListResponse{
+  repeated SingleProductSpecification ProductSpecificationItems = 1;
+}
+
+
+message GetProductRequest{
+  string Id = 1;
+}
+message GetProductResponse {
+  string Id = 1;
+  string Title = 2;
+  string Description = 3;
+  string CategoryId = 4;
+}
+message AddProductRequest {
+  string Title = 1;
+  string Description = 2;
+  string CategoryId = 3;
+}
+
+message AddProductResponse {
+  string Id = 1;
+  string Title = 2;
+  string Description = 3;
+  string CategoryId = 4;
+}
+
+message EditProductRequest {
+  string Id = 1;
+  string Title = 2;
+  string Description = 3;
+  string CategoryId = 4;
+}
+
+message EditProductResponse {
+  string Id = 1;
+  string Title = 2;
+  string Description = 3;
+  string CategoryId = 4;
+}
+
+message RemoveProductRequest{
+  string Id = 1;
+}
+
+message ProductListRequest {
+  int32 PageIndex = 1;
+  int32 PageSize = 2;
+}
+
+message SingleProduct{
+  string Id = 1;
+  string Title = 2;
+  string Description = 3;
+  string CategoryId = 4;
+}
+
+message ProductListResponse{
+  repeated SingleProduct ProductItems = 1;
+}
+
