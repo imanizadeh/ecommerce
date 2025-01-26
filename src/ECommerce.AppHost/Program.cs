@@ -32,11 +32,21 @@ public class Program
             .WaitFor(seq)
             .WithReference(rabbitmq)
             .WaitFor(rabbitmq);
+        
+        var inventory = builder.AddProject<Projects.ECommerce_Inventory>("inventory")
+            .WithReference(sqlServerDatabase)
+            .WaitFor(sqlServerDatabase)
+            .WithReference(seq)
+            .WaitFor(seq)
+            .WithReference(rabbitmq)
+            .WaitFor(rabbitmq);
 
         builder.AddProject<Projects.ECommerce_Gateway>("gateway")
             .WithExternalHttpEndpoints()
             .WithReference(productManagement)
             .WaitFor(productManagement)
+            .WithReference(inventory)
+            .WaitFor(inventory)
             .WithReference(seq)
             .WaitFor(seq);
 
