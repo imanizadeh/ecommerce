@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Aspire.Hosting;
+using ECommerce.Gateway.Dtos.Inventory;
 using ECommerce.Gateway.Dtos.ProductsManagements;
 using ECommerce.ProductManagement.API.Grpc;
 using FluentAssertions;
@@ -344,6 +345,140 @@ public class GatewayTest
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }
     
+    [Fact]
+    public async Task TestCreateProductStock()
+    {
+        // Arrange
+        await using var app = await GetApplication();
+        var httpClient = app.CreateHttpClient("gateway");
+        var productsResponse = await httpClient.GetAsync("/api/products-management/products?pageIndex=1&pageSize=10");
+        var products = await ToAModelAsync<List<SingleProduct>>(productsResponse);
+        var productId = products[0].Id;
+        var stock = new AddStockDto()
+        {
+            ProductId = Guid.Parse(productId),
+            ProductType = 1,
+            SerialNumber = "test-serial-number",
+            Color = 1,
+            Discount = 12,
+            Count = 10,
+            Price = 1234000
+        };
+       
+        
+        // Act
+        var stockResponse = await httpClient.PostAsJsonAsync("/api/inventory", stock);
+        var returnedStock = await ToAModelAsync<Stock>(stockResponse);
+        
+        // Assert
+        returnedStock.SerialNumber.Should().BeEquivalentTo(returnedStock.SerialNumber);
+    }
+    
+    [Fact]
+    public async Task TestEditProductStock()
+    {
+        // Arrange
+        await using var app = await GetApplication();
+        var httpClient = app.CreateHttpClient("gateway");
+        var productsResponse = await httpClient.GetAsync("/api/products-management/products?pageIndex=1&pageSize=10");
+        var products = await ToAModelAsync<List<SingleProduct>>(productsResponse);
+        var productId = products[0].Id;
+        var stock = new AddStockDto()
+        {
+            ProductId = Guid.Parse(productId),
+            ProductType = 1,
+            SerialNumber = "test-serial-number",
+            Color = 1,
+            Discount = 12,
+            Count = 10,
+            Price = 1234000
+        };
+        var stockResponse = await httpClient.PostAsJsonAsync("/api/inventory", stock);
+        var returnedStock = await ToAModelAsync<Stock>(stockResponse);
+        
+        
+        var stockForEdit = new EditStockDto()
+        {
+            Id = returnedStock.Id,
+            ProductId = returnedStock.ProductId,
+            SerialNumber = "updated-serial-number",
+            Color = 2,
+            Discount = 9,
+            Count = 20,
+            Price = 800000,
+            ProductType = 2
+            
+        };
+        
+        // Act
+        var editedStockResponse = await httpClient.PutAsJsonAsync($"/api/inventory/{stockForEdit.Id}", stockForEdit);
+        var editedReturnedStock = await ToAModelAsync<Stock>(editedStockResponse);
+        
+        // Assert
+        stockForEdit.SerialNumber.Should().BeEquivalentTo(editedReturnedStock.SerialNumber);
+    }
+    
+    [Fact]
+    public async Task TestGetProductStockById()
+    {
+        // Arrange
+        await using var app = await GetApplication();
+        var httpClient = app.CreateHttpClient("gateway");
+        var productsResponse = await httpClient.GetAsync("/api/products-management/products?pageIndex=1&pageSize=10");
+        var products = await ToAModelAsync<List<SingleProduct>>(productsResponse);
+        var productId = products[0].Id;
+        var stock = new AddStockDto()
+        {
+            ProductId = Guid.Parse(productId),
+            ProductType = 1,
+            SerialNumber = "test-serial-number",
+            Color = 1,
+            Discount = 12,
+            Count = 10,
+            Price = 1234000
+        };
+        var stockResponse = await httpClient.PostAsJsonAsync("/api/inventory", stock);
+        var addedStock  = await ToAModelAsync<Stock>(stockResponse);
+        
+        
+        // Act
+        var response = await httpClient.GetAsync($"/api/inventory/{addedStock.Id}");
+        var returnedStock = await ToAModelAsync<Stock>(response);
+        
+        // Assert
+        addedStock.Id.Should().Be(returnedStock.Id);
+    }
+    
+    [Fact]
+    public async Task TestGetProductStockByProductId()
+    {
+        // Arrange
+        await using var app = await GetApplication();
+        var httpClient = app.CreateHttpClient("gateway");
+        var productsResponse = await httpClient.GetAsync("/api/products-management/products?pageIndex=1&pageSize=10");
+        var products = await ToAModelAsync<List<SingleProduct>>(productsResponse);
+        var productId = products[0].Id;
+        var stock = new AddStockDto()
+        {
+            ProductId = Guid.Parse(productId),
+            ProductType = 1,
+            SerialNumber = "test-serial-number",
+            Color = 1,
+            Discount = 12,
+            Count = 10,
+            Price = 1234000
+        };
+        var stockResponse = await httpClient.PostAsJsonAsync("/api/inventory", stock);
+        var addedStock  = await ToAModelAsync<Stock>(stockResponse);
+        
+        
+        // Act
+        var response = await httpClient.GetAsync($"/api/inventory/{addedStock.ProductId}/stock");
+        var returnedStock = await ToAModelAsync<Stock>(response);
+        
+        // Assert
+        addedStock.ProductId.Should().Be(returnedStock.ProductId);
+    }
     private static async Task<DistributedApplication> GetApplication()
     {
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.ECommerce_AppHost>();
@@ -359,7 +494,7 @@ public class GatewayTest
             .WaitAsync(TimeSpan.FromSeconds(60));
         return app;
     }
-    
+  
     private async Task<T?> ToAModelAsync<T>(HttpResponseMessage httpResponseMessage)
     {
         httpResponseMessage.EnsureSuccessStatusCode();
