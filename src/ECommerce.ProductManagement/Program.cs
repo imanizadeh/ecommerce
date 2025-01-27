@@ -1,7 +1,6 @@
-using ECommerce.ProductManagement.ApplicationUseCases.IntegrationEvents;
 using ECommerce.ProductManagement.DrivenAdapters.Persistence.SqlDatabase;
 using ECommerce.ProductManagement.DrivingAdapters.GrpcApi;
-using MassTransit;
+
 
 namespace ECommerce.ProductManagement;
 

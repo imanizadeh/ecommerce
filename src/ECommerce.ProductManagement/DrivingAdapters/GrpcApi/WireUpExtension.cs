@@ -1,12 +1,11 @@
 using EasyCaching.Core.Configurations;
+using ECommerce.Contracts.IntegrationEvents.ProductManagement;
 using ECommerce.ProductManagement.ApplicationUseCases.Behaviors;
 using ECommerce.ProductManagement.ApplicationUseCases.CommandsAndQueries;
 using ECommerce.ProductManagement.ApplicationUseCases.Common;
-using ECommerce.ProductManagement.ApplicationUseCases.IntegrationEvents;
 using ECommerce.ProductManagement.ApplicationUseCases.Validators;
 using ECommerce.ProductManagement.Domain.ProductCategories;
 using ECommerce.ProductManagement.Domain.Products;
-using ECommerce.ProductManagement.DrivenAdapters.Persistence;
 using ECommerce.ProductManagement.DrivenAdapters.Persistence.Cache;
 using ECommerce.ProductManagement.DrivenAdapters.Persistence.SqlDatabase;
 using ECommerce.SharedFramework;
@@ -54,11 +53,11 @@ public static class WireUpExtension
     {
         builder.Services.AddMassTransit(config =>
         {
-            config.SetKebabCaseEndpointNameFormatter();
-            config.UsingRabbitMq((_, cfg) =>
+            config.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host(builder.Configuration.GetConnectionString("rabbitmq"));
                 cfg.UseRawJsonSerializer();
+                cfg.Host(builder.Configuration.GetConnectionString("rabbitmq"));
+                cfg.ConfigureEndpoints(context);
                 
                 cfg.Message<ProductCategoryCreatedEvent>(conf =>
                 {
