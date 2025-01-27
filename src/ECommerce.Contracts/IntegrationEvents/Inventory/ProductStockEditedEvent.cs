@@ -1,6 +1,6 @@
 using ECommerce.SharedFramework;
 
-namespace ECommerce.Inventory.ApplicationUseCases.IntegrationEvents;
+namespace ECommerce.Contracts.IntegrationEvents.Inventory;
 
 public class ProductStockEditedEvent : IntegrationEvent
 {

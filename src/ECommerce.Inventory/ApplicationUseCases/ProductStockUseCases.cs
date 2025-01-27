@@ -1,5 +1,5 @@
-﻿using ECommerce.Inventory.ApplicationUseCases.CommandsAndQueries;
-using ECommerce.Inventory.ApplicationUseCases.IntegrationEvents;
+﻿using ECommerce.Contracts.IntegrationEvents.Inventory;
+using ECommerce.Inventory.ApplicationUseCases.CommandsAndQueries;
 using ECommerce.Inventory.Domain;
 using ECommerce.SharedFramework;
 using MassTransit;

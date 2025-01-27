@@ -1,6 +1,6 @@
 using ECommerce.SharedFramework;
 
-namespace ECommerce.ProductManagement.ApplicationUseCases.IntegrationEvents;
+namespace ECommerce.Contracts.IntegrationEvents.ProductManagement;
 
 public class ProductEditedEvent : IntegrationEvent
 {

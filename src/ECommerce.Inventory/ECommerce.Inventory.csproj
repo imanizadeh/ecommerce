@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\ECommerce.Contracts\ECommerce.Contracts.csproj" />
         <ProjectReference Include="..\ECommerce.ServiceDefaults\ECommerce.ServiceDefaults.csproj"/>
         <ProjectReference Include="..\ECommerce.SharedFramework\ECommerce.SharedFramework.csproj"/>
     </ItemGroup>

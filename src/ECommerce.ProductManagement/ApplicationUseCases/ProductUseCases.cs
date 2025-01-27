@@ -1,6 +1,6 @@
+using ECommerce.Contracts.IntegrationEvents.ProductManagement;
 using ECommerce.ProductManagement.ApplicationUseCases.CommandsAndQueries;
 using ECommerce.ProductManagement.ApplicationUseCases.Common;
-using ECommerce.ProductManagement.ApplicationUseCases.IntegrationEvents;
 using ECommerce.ProductManagement.Domain.ProductCategories;
 using ECommerce.ProductManagement.Domain.Products;
 using ECommerce.SharedFramework;

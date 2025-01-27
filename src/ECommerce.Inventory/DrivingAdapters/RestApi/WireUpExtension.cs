@@ -1,6 +1,6 @@
+using ECommerce.Contracts.IntegrationEvents.Inventory;
 using ECommerce.Inventory.ApplicationUseCases.Behaviors;
 using ECommerce.Inventory.ApplicationUseCases.CommandsAndQueries;
-using ECommerce.Inventory.ApplicationUseCases.IntegrationEvents;
 using ECommerce.Inventory.ApplicationUseCases.Validators;
 using ECommerce.Inventory.Domain;
 using ECommerce.Inventory.DrivenAdapters.Persistence.SqlDatabase;
@@ -43,7 +43,6 @@ public static class WireUpExtension
     {
         builder.Services.AddMassTransit(config =>
         {
-            config.SetKebabCaseEndpointNameFormatter();
             config.UsingRabbitMq((_, cfg) =>
             {
                 cfg.Host(builder.Configuration.GetConnectionString("rabbitmq"));
@@ -53,7 +52,10 @@ public static class WireUpExtension
                 {
                     conf.SetEntityName(nameof(ProductStockCreatedEvent));
                 });
-                cfg.Message<ProductStockEditedEvent>(conf => { conf.SetEntityName(nameof(ProductStockEditedEvent)); });
+                cfg.Message<ProductStockEditedEvent>(conf =>
+                {
+                    conf.SetEntityName(nameof(ProductStockEditedEvent));
+                });
             });
         });
     }
