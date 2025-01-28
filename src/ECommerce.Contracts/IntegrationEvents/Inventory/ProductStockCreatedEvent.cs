@@ -9,9 +9,9 @@ public class ProductStockCreatedEvent : IntegrationEvent
     public int Count { get; private set; }
     public decimal Discount { get; private set; }
     public string SerialNumber { get; private set; }
-    public byte ProductType { get; private set; }
+    public string ProductType { get; private set; }
     public decimal Price { get; private set; }
-    public byte Color { get; private set; }
+    public string Color { get; private set; }
 
     public ProductStockCreatedEvent(
         Guid id,
@@ -19,9 +19,9 @@ public class ProductStockCreatedEvent : IntegrationEvent
         int count,
         decimal discount,
         string serialNumber,
-        byte productType,
+        string productType,
         decimal price,
-        byte color)
+        string color)
     {
         EventId = Guid.NewGuid();
         PublishDateTime = DateTime.UtcNow;

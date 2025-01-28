@@ -206,7 +206,7 @@ public class ProductUseCases (
         }
         productRepository.RemoveProductSpecification(existingProductSpecification);
         await unitOfWork.SaveChangesAsync(cancellationToken);
-        await rabbitBus.Publish(new ProductSpecDeletedEvent(existingProductSpecification.Id), cancellationToken);
+        await rabbitBus.Publish(new ProductSpecDeletedEvent(existingProductSpecification.Id,existingProductSpecification.ProductId), cancellationToken);
         await cacheService.RemoveKeyAsync(CacheKeys.ProductSpecifications);
     }
 }

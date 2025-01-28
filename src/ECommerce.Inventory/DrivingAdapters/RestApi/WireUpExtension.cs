@@ -43,11 +43,11 @@ public static class WireUpExtension
     {
         builder.Services.AddMassTransit(config =>
         {
-            config.UsingRabbitMq((_, cfg) =>
+            config.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(builder.Configuration.GetConnectionString("rabbitmq"));
                 cfg.UseRawJsonSerializer();
-
+                cfg.ConfigureEndpoints(context);
                 cfg.Message<ProductStockCreatedEvent>(conf =>
                 {
                     conf.SetEntityName(nameof(ProductStockCreatedEvent));
