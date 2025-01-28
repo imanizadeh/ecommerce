@@ -9,20 +9,11 @@ public class InventoryService(IHttpClientFactory httpClientFactory)
 
     public async Task<Stock> AddProductStock(AddStockDto stockDto)
     {
-        try
-        {
-            var response = await _httpClient.PostAsJsonAsync("api/inventory", stockDto);
-            var stock = await ToAModelAsync<Stock>(response);
-            return stock;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-
+        var response = await _httpClient.PostAsJsonAsync("api/inventory", stockDto);
+        var stock = await ToAModelAsync<Stock>(response);
+        return stock;
     }
-    
+
     public async Task<Stock> EditProductStock(EditStockDto stockDto)
     {
         var response = await _httpClient.PutAsJsonAsync($"api/inventory/{stockDto.Id}", stockDto);
@@ -41,7 +32,7 @@ public class InventoryService(IHttpClientFactory httpClientFactory)
         var result = await _httpClient.GetFromJsonAsync<Stock>($"api/inventory/{productId}/stock");
         return result;
     }
-    
+
     private async Task<T?> ToAModelAsync<T>(HttpResponseMessage httpResponseMessage)
     {
         httpResponseMessage.EnsureSuccessStatusCode();

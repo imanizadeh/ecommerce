@@ -21,6 +21,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<InventoryService>();
+        builder.Services.AddScoped<CatalogService>();
 
         builder.Services.AddGrpcClient<ProductManagement.API.Grpc.ProductManagementService.ProductManagementServiceClient>(options =>
         {
@@ -30,6 +31,12 @@ public class Program
         builder.Services.AddHttpClient("Inventory", httpClient =>
         {
             httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Inventory:ServerUrl"));
+        })
+        .AddPolicyHandler(GetCircuitBreakerPolicy());
+        
+        builder.Services.AddHttpClient("Catalog", httpClient =>
+        {
+           httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Catalog:ServerUrl"));
         })
         .AddPolicyHandler(GetCircuitBreakerPolicy());
         
@@ -44,6 +51,7 @@ public class Program
         app.UseAuthorization();
         app.MapProductManagementEndpoints();
         app.MapInventoryEndpoints();
+        app.MapCatalogEndpoints();
         app.MapDefaultEndpoints();
 
         app.Run();
