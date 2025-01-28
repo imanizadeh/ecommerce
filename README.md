@@ -50,7 +50,7 @@ Afshin Imanizadeh - (https://www.linkedin.com/in/imanizadeh/) - a.imanizadeh@out
 <!-- LICENSE -->
 ## License
 
-Distributed under the Unlicense License. See `LICENSE` for more information.
+See `LICENSE` for more information.
 
 
 ## Project status
