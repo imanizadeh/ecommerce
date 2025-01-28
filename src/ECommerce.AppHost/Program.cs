@@ -22,6 +22,10 @@ public class Program
         var sqlServerDatabase = builder.AddSqlServer("sql-server")
             .WithDataVolume(isReadOnly: false)
             .AddDatabase("ECommerceDatabase");
+        
+        var mongo = builder.AddMongoDB("mongo")
+            .WithLifetime(ContainerLifetime.Persistent);
+        var mongodb = mongo.AddDatabase("catalogdb");
 
         var productManagement = builder.AddProject<Projects.ECommerce_ProductManagement>("product-management")
             .WithReference(sqlServerDatabase)
@@ -41,12 +45,24 @@ public class Program
             .WithReference(rabbitmq)
             .WaitFor(rabbitmq);
 
+        
+        var catalog =  builder.AddProject<Projects.ECommerce_Catalog>("catalog")
+            .WithExternalHttpEndpoints()
+            .WithReference(mongodb)
+            .WaitFor(mongodb)
+            .WithReference(rabbitmq)
+            .WaitFor(rabbitmq)
+            .WithReference(seq)
+            .WaitFor(seq);
+        
         builder.AddProject<Projects.ECommerce_Gateway>("gateway")
             .WithExternalHttpEndpoints()
             .WithReference(productManagement)
             .WaitFor(productManagement)
             .WithReference(inventory)
             .WaitFor(inventory)
+            .WithReference(catalog)
+            .WaitFor(catalog)
             .WithReference(seq)
             .WaitFor(seq);
 

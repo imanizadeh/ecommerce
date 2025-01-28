@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.0.0" />
 	<PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
 	<PackageReference Include="Aspire.Hosting.Seq" Version="9.0.0" />
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ECommerce.Catalog\ECommerce.Catalog.csproj" />
     <ProjectReference Include="..\ECommerce.Gateway\ECommerce.Gateway.csproj" />
     <ProjectReference Include="..\ECommerce.Inventory\ECommerce.Inventory.csproj" />
     <ProjectReference Include="..\ECommerce.ProductManagement\ECommerce.ProductManagement.csproj" />
