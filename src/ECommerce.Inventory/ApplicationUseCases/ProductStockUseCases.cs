@@ -35,9 +35,9 @@ public class ProductStockUseCases(
                 stock.Count,
                 stock.Discount,
                 stock.SerialNumber,
-                (byte)stock.ProductType,
+                stock.ProductType.ToString(),
                 stock.Price,
-                (byte)stock.Color),
+                stock.Color.ToString()),
             cancellationToken);
 
         return MapToStockQueryResult(stock);
@@ -68,9 +68,9 @@ public class ProductStockUseCases(
                 existingProductStock.Count,
                 existingProductStock.Discount,
                 existingProductStock.SerialNumber,
-                (byte)existingProductStock.ProductType,
+                existingProductStock.ProductType.ToString(),
                 existingProductStock.Price,
-                (byte)existingProductStock.Color),
+                existingProductStock.Color.ToString()),
             cancellationToken);
 
         return MapToStockQueryResult(existingProductStock);

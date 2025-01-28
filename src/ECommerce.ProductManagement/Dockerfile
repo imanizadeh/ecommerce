@@ -10,6 +10,7 @@ WORKDIR /src
 COPY ["src/ECommerce.ProductManagement/ECommerce.ProductManagement.csproj", "src/ECommerce.ProductManagement/"]
 COPY ["src/ECommerce.ServiceDefaults/ECommerce.ServiceDefaults.csproj", "src/ECommerce.ServiceDefaults/"]
 COPY ["src/ECommerce.SharedFramework/ECommerce.SharedFramework.csproj", "src/ECommerce.SharedFramework/"]
+COPY ["src/ECommerce.Contracts/ECommerce.Contracts.csproj", "src/ECommerce.Contracts/"]
 RUN dotnet restore "src/ECommerce.ProductManagement/ECommerce.ProductManagement.csproj"
 COPY . .
 WORKDIR "/src/src/ECommerce.ProductManagement"
