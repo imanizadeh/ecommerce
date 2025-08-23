@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ECommerce.Gateway/ECommerce.Gateway.csproj" />
+    <Project Path="src/ECommerce.SharedFramework/ECommerce.SharedFramework.csproj" />
+  </Folder>
+  <Folder Name="/src/AspireHosting/">
+    <Project Path="src/AspireHosting/ECommerce.AppHost/ECommerce.AppHost.csproj" />
+    <Project Path="src/AspireHosting/ECommerce.ServiceDefaults/ECommerce.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/Catalog/">
+    <Project Path="src/Catalog/ECommerce.Catalog/ECommerce.Catalog.csproj" />
+  </Folder>
+  <Folder Name="/src/Inventory/">
+    <Project Path="src/Inventory/ECommerce.Inventory.Contracts/ECommerce.Inventory.Contracts.csproj" Id="e9208d1e-4a1f-42db-bd37-dcc406e97d93" />
+    <Project Path="src/Inventory/ECommerce.Inventory/ECommerce.Inventory.csproj" />
+  </Folder>
+  <Folder Name="/src/ProductManagement/">
+    <Project Path="src/ProductManagement/ECommerce.ProductManagement.Contracts/ECommerce.ProductManagement.Contracts.csproj" Id="58ca82e3-dfa2-4046-b8e4-8fb2e3415582" />
+    <Project Path="src/ProductManagement/ECommerce.ProductManagement/ECommerce.ProductManagement.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Ecommerce.Test.Integration/Ecommerce.Test.Integration.csproj" />
+  </Folder>
+</Solution>
