@@ -24,11 +24,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ECommerce.ServiceDefaults\ECommerce.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\AspireHosting\ECommerce.ServiceDefaults\ECommerce.ServiceDefaults.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="..\ECommerce.ProductManagement\DrivingAdapters\GrpcApi\ProductManagementService.proto" GrpcServices="Client">
+      <Protobuf Include="..\ProductManagement\ECommerce.ProductManagement\DrivingAdapters\GrpcApi\ProductManagementService.proto" GrpcServices="Client">
         <Link>Protos\ProductManagementService.proto</Link>
       </Protobuf>
     </ItemGroup>
