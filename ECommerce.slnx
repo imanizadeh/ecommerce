@@ -18,6 +18,9 @@
     <Project Path="src/ProductManagement/ECommerce.ProductManagement.Contracts/ECommerce.ProductManagement.Contracts.csproj" Id="58ca82e3-dfa2-4046-b8e4-8fb2e3415582" />
     <Project Path="src/ProductManagement/ECommerce.ProductManagement/ECommerce.ProductManagement.csproj" />
   </Folder>
+  <Folder Name="/src/Wallet/">
+    <Project Path="src/Wallet/ECommerce.Wallet/ECommerce.Wallet.csproj" />
+  </Folder>
   <Folder Name="/test/">
     <Project Path="test/Ecommerce.Test.Integration/Ecommerce.Test.Integration.csproj" />
   </Folder>

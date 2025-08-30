@@ -25,6 +25,7 @@
     <ProjectReference Include="..\..\ECommerce.Gateway\ECommerce.Gateway.csproj" />
     <ProjectReference Include="..\..\Inventory\ECommerce.Inventory\ECommerce.Inventory.csproj" />
     <ProjectReference Include="..\..\ProductManagement\ECommerce.ProductManagement\ECommerce.ProductManagement.csproj" />
+    <ProjectReference Include="..\..\Wallet\ECommerce.Wallet\ECommerce.Wallet.csproj" />
   </ItemGroup>
 
 </Project>
