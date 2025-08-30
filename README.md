@@ -1,12 +1,6 @@
 # ECommerce
 Cross-platform .NET real world e-commerce sample microservices and container based application that runs on Linux Windows and macOS. Powered by .NET 9, Docker Containers, Aspire, DDD, Ports and Adapters layered architecture, gRPC, Redis, MSSql, MongoDb, Rabbitmq.
 
-<figure class="video_container">
-  <iframe src="https://www.youtube.com/watch?v=kPfxOSFEv-Y" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
-
-- Introducing Video (https://www.youtube.com/watch?v=kPfxOSFEv-Y)
-
 
 ## Prerequisites
 
